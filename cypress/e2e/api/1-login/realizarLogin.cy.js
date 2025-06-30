@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Teste de Login", () => {
+describe("Testes de Login", () => {
   it("Deve realizar o login com sucesso", () => {
     cy.login("fulano@qa.com", "teste").then((response) => {
       expect(response.status).to.eq(200);
