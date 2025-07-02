@@ -12,6 +12,23 @@ Cypress.Commands.add("login", (username, password) => {
   });
 });
 
+Cypress.Commands.add("autenticar", () => {
+  cy.request({
+    method: "POST",
+    url: "login",
+    body: {
+      email: "fulano@qa.com",
+      password: "teste",
+    },
+    failOnStatusCode: false,
+  }).then((response) => {
+    if (response.status === 200 && response.body.authorization) {
+      Cypress.env("token", response.body.authorization); // Salva o token
+      cy.log(response.body.authorization);
+    }
+  });
+});
+
 Cypress.Commands.add("listarUsuarioCadastrados", () => {
   cy.request({
     method: "GET",

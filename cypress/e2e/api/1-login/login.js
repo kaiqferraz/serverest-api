@@ -1,10 +1,14 @@
 /// <reference types="cypress" />
 
+let token;
+
 describe("Testes de Login", () => {
   it("Deve realizar o login com sucesso", () => {
     cy.login("fulano@qa.com", "teste").then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body.message).to.equal("Login realizado com sucesso");
+      token = response.body.authorization;
+      cy.log(response.body.authorization);
     });
   });
 
